@@ -10,7 +10,6 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.post('/' + deployAPIendpoint, function (req, res) {
-  console.log(req.body)
   if (req.body.ref !== 'refs/heads/master') {
     console.log('Non master change, ignore')
     res.status(500).send('Non master change, ignore')
@@ -37,7 +36,7 @@ app.listen(serverConfig.PORT)
 
 function verifySecret (secret, req) {
   var signature = req.headers['x-hub-signature']
-  let payload = JSON.stringify({ hello: 'world' })
+  let payload = JSON.stringify(req.body)
   return verifyGithubWebhook(signature, payload, secret)
 }
 function puts (error, stdout, stderr) {
@@ -47,7 +46,7 @@ function puts (error, stdout, stderr) {
   console.log(stdout)
 }
 function updateRepo (repo) {
-  exec('cd ' + repo.fullPath + ' && git pull && cd', puts)
+  setTimeout(function () { exec('cd ' + repo.fullPath + ' && git pull && cd', puts) }, 5000)
   setTimeout(function () { restartPM2process(repo.pm2ProcessID) }, 5000)
 }
 
