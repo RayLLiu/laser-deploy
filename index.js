@@ -1,9 +1,9 @@
 
+import verifyGithubWebhook from 'verify-github-webhook'
 var serverConfig = require('./config.js').serverConfig
 var deployAPIendpoint = serverConfig.deployAPIendpoint
 var express = require('express')
 const bodyParser = require('body-parser')
-var verifyGithubWebhook = require('verify-github-webhook')
 var _ = require('lodash')
 var exec = require('child_process').exec
 
