@@ -5,7 +5,6 @@ var express = require('express')
 const bodyParser = require('body-parser')
 var verifyGithubWebhook = require('verify-github-webhook')
 var _ = require('lodash')
-var sys = require('sys')
 var exec = require('child_process').exec
 
 var app = express()
@@ -43,9 +42,17 @@ function verifySecret (secret, req) {
   let payload = JSON.stringify({ hello: 'world' })
   return verifyGithubWebhook(signature, payload, secret)
 }
-
+function puts (error, stdout, stderr) {
+  if (error) {
+    console.log(error)
+  }
+  console.log(stdout)
+}
 function updateRepo (repo) {
-  function puts (error, stdout, stderr) { sys.puts(stdout) }
   exec('cd ' + repo.fullPath + ' && git pull && cd', puts)
-  setTimeout(exec('pm2 restart ' + repo.pm2ProcessID, puts), 5000)
+  setTimeout(function () { restartPM2process(repo.pm2ProcessID) }, 5000)
+}
+
+function restartPM2process (id) {
+  exec('pm2 restart ' + id, puts)
 }
