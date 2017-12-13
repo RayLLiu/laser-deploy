@@ -1,12 +1,10 @@
-
-var verifyGithubWebhook = require('verify-github-webhook')
 var serverConfig = require('./config.js').serverConfig
 var deployAPIendpoint = serverConfig.deployAPIendpoint
 var express = require('express')
 const bodyParser = require('body-parser')
 var _ = require('lodash')
 var exec = require('child_process').exec
-
+var crypto = require('crypto')
 var app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -55,4 +53,9 @@ function updateRepo (repo) {
 
 function restartPM2process (id) {
   exec('pm2 restart ' + id, puts)
+}
+
+function verifyGithubWebhook (signature, payload, secret) {
+  const computedSignature = `sha1=${crypto.createHmac('sha1', secret).update(payload).digest('hex')}`
+  return crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(computedSignature))
 }

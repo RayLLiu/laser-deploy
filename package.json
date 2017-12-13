@@ -10,6 +10,5 @@
     "githubhook": "^1.9.3",
     "lodash": "^4.17.4",
     "nodemon": "^1.12.5",
-    "verify-github-webhook": "^1.0.1"
   }
 }
