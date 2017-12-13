@@ -1,5 +1,5 @@
 
-import verifyGithubWebhook from 'verify-github-webhook'
+var verifyGithubWebhook = require('verify-github-webhook')
 var serverConfig = require('./config.js').serverConfig
 var deployAPIendpoint = serverConfig.deployAPIendpoint
 var express = require('express')
