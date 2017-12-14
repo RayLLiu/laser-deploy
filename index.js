@@ -48,7 +48,7 @@ function puts (error, stdout, stderr) {
 }
 function updateRepo (repo) {
   exec('cd ' + repo.fullPath + ' && git pull && cd', puts)
-  if (serverConfig.restartService) {
+  if (repo.restartService) {
     setTimeout(function () { restartPM2process(repo.pm2ProcessID) }, 5000)
   }
 }
