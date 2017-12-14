@@ -9,6 +9,6 @@
     "express": "^4.16.2",
     "githubhook": "^1.9.3",
     "lodash": "^4.17.4",
-    "nodemon": "^1.12.5",
+    "nodemon": "^1.12.5"
   }
 }
