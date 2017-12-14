@@ -37,7 +37,7 @@ app.listen(serverConfig.PORT)
 
 function verifySecret (secret, req) {
   var signature = req.headers['x-hub-signature']
-  let payload = JSON.stringify({ hello: 'world' })
+  let payload = JSON.stringify(req.body)
   return verifyGithubWebhook(signature, payload, secret)
 }
 function puts (error, stdout, stderr) {
