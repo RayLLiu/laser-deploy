@@ -1,5 +1,6 @@
 module.exports.serverConfig = {
   PORT: 8888,
+  restartService: false,
   repos: [{
     full_name: '',
     secret: '',
@@ -8,4 +9,3 @@ module.exports.serverConfig = {
   }],
   deployAPIendpoint: 'deploy'
 }
-
