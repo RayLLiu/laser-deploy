@@ -4,6 +4,7 @@ module.exports.serverConfig = {
     full_name: '',
     secret: '',
     fullPath: '',
+    restartService: false,
     pm2ProcessID: '0'
   }],
   deployAPIendpoint: 'deploy'
