@@ -47,7 +47,7 @@ function puts (error, stdout, stderr) {
   console.log(stdout)
 }
 function updateRepo (repo) {
-  exec('cd ' + repo.fullPath + ' && git pull && cd', puts)
+  exec('cd ' + repo.fullPath + ' && git pull && yarn install && cd', puts)
   if (repo.restartService) {
     setTimeout(function () { restartPM2process(repo.pm2ProcessID) }, 5000)
   }
