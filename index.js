@@ -33,6 +33,10 @@ app.post('/' + deployAPIendpoint, function (req, res) {
   }
 })
 
+app.get('/admin/:password', function (req, res) {
+  console.log(req.params.password)
+})
+
 app.listen(serverConfig.PORT)
 
 function verifySecret (secret, req) {

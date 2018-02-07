@@ -1,5 +1,6 @@
 module.exports.serverConfig = {
   PORT: 8888,
+  adminPass: '',
   repos: [{
     full_name: '',
     secret: '',
