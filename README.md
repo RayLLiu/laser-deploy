@@ -59,6 +59,10 @@ Now you can push something to master and the server should be updated immediatel
 
 If you run more services on the same service, just add more config objects to `config.js` and repeat the steps above.
 
+## Tests
+
+`yarn add mocha global`
+`mocha`
 
 ## Contributors
 
