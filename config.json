@@ -1,0 +1,13 @@
+{
+  "PORT": 8888,
+  "adminPassword": "123123",
+  "adminEnabled": true,
+  "repos": [{
+    "full_name": "zhang96/BubbleHRCandidateService",
+    "secret": "111111",
+    "fullPath": "/Users/rayliu/Documents/GitHub/BubbleHRCandidateService",
+    "restartService": false,
+    "pm2ProcessID": "0"
+  }],
+  "deployAPIendpoint": "deploy"
+}

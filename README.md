@@ -23,7 +23,7 @@ And my repo url is `https://github.com/RayLLiu/githubWebhookAutoDeployment`,
  `module.exports.serverConfig = {
    PORT: 1234,
    repos: [{
-     full_name: 'yourgGithubID/reponame',
+     fullName: 'yourgGithubID/reponame',
      secret: 'yourSecret',
      fullPath: '/path/path',
      restartService: true,
