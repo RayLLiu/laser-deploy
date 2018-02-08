@@ -1,0 +1,13 @@
+{
+  "PORT": 8888,
+  "adminPassword": "",
+  "adminEnabled": true,
+  "repos": [{
+    "full_name": "",
+    "secret": "",
+    "fullPath": "",
+    "restartService": false,
+    "pm2ProcessID": ""
+  }],
+  "deployAPIendpoint": "deploy"
+}
