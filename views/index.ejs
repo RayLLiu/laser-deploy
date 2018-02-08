@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <title>Autodeploy Admin</title>
+</head>
+
+<body>
+  <div class="container" style="padding:40px;">
+    <div class="d-flex justify-content-center">
+      <form id='form'>
+        <div class="form-group">
+          <label for="fullName">Admin password</label>
+          <input type="password" class="form-control required" id="password" placeholder="password">
+        </div>
+        <div class="form-group">
+          <label for="fullName">repo full name</label>
+          <input class="form-control required" id="fullName" placeholder="RayLLiu/githubWebhookAutoDeployment">
+        </div>
+        <div class="form-group">
+          <label for="secret">secret</label>
+          <input class="form-control required" id="secret" placeholder="!@#$ASD">
+        </div>
+        <div class="form-group">
+          <label for="fullPath">repo full path</label>
+          <input class="form-control required" id="fullPath" placeholder="/root/repoFolder">
+        </div>
+        <div class="form-group">
+          <label for="pm2id">pm2 process id or name</label>
+          <input class="form-control required" id="pm2ProcessID" placeholder="myMicroservice">
+        </div>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="restartService">
+          <label class="form-check-label">restart service on update</label>
+        </div>
+        <button type="button" class="btn btn-primary" id='submit'>Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script>
+    $("#submit").on('click', function() {
+
+      var data = {
+        password: $('#password').val(),
+        fullName: $('#fullName').val(),
+        secret: $('#secret').val(),
+        fullPath: $('#fullPath').val(),
+        pm2ProcessID: $('#pm2ProcessID').val(),
+        restartService: $('#restartService').is(":checked")
+      }
+      console.log(data);
+      if (data.password && data.fullName && data.secret && data.fullPath && data.pm2ProcessID) {
+        $.ajax({
+          url: '/addrepo',
+          type: "POST",
+          dataType: 'json',
+          data: data,
+          success: function(result) {
+            console.log('returned');
+            $(':input', '#form')
+              .not(':button, :submit, :reset, :hidden, :checkbox')
+              .val('')
+              .removeAttr('checked')
+              .removeAttr('selected');
+          },
+          error: function(xhr, resp, text) {
+
+          }
+        })
+      }
+    });
+  </script>
+</body>
+
+</html>
