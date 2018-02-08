@@ -18,6 +18,8 @@ And my repo url is `https://github.com/RayLLiu/githubWebhookAutoDeployment`,
  After that, create a secret string (keep it private)
  If your service is running on pm2, you will also need to add pm2 process id.
 
+
+
  4. After that, change the `config.template.json` to `config.json`
  Your `config.js` should be simillar to this:
  `{
