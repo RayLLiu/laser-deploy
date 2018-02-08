@@ -4,8 +4,8 @@ var express = require('express')
 var path = require('path')
 const bodyParser = require('body-parser')
 var _ = require('lodash')
-var exec = require('child_process').exec
-var crypto = require('crypto')
+var Util = require('./services/util.js')
+var utilService = new Util()
 var app = express()
 var fs = require('fs')
 app.use(bodyParser.json())
@@ -24,13 +24,13 @@ app.post('/' + deployAPIendpoint, function (req, res) {
       console.log('Repo not registered')
       res.status(500).send('Repo not registered')
     } else {
-      var auth = verifySecret(repo.secret, req)
+      var auth = utilService.verifySecret(repo.secret, req)
       if (!auth) {
         console.log('Wrong Secret')
         res.status(500).send('Wrong Secret')
       } else {
         // execute git pull
-        updateRepo(repo)
+        utilService.updateRepo(repo)
       }
     }
   }
@@ -59,30 +59,3 @@ app.post('/addrepo', function (req, res) {
 })
 
 app.listen(serverConfig.PORT)
-
-function verifySecret (secret, req) {
-  var signature = req.headers['x-hub-signature']
-  let payload = JSON.stringify(req.body)
-  return verifyGithubWebhook(signature, payload, secret)
-}
-function puts (error, stdout, stderr) {
-  if (error) {
-    console.log(error)
-  }
-  console.log(stdout)
-}
-function updateRepo (repo) {
-  exec('cd ' + repo.fullPath + ' && git pull && yarn install && cd', puts)
-  if (repo.restartService) {
-    setTimeout(function () { restartPM2process(repo.pm2ProcessID) }, 5000)
-  }
-}
-
-function restartPM2process (id) {
-  exec('pm2 restart ' + id, puts)
-}
-
-function verifyGithubWebhook (signature, payload, secret) {
-  const computedSignature = `sha1=${crypto.createHmac('sha1', secret).update(payload).digest('hex')}`
-  return crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(computedSignature))
-}
