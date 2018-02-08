@@ -3,9 +3,9 @@
   "adminPassword": "123123",
   "adminEnabled": true,
   "repos": [{
-    "full_name": "zhang96/BubbleHRCandidateService",
+    "fullName": "RayLLiu/githubWebhookAutoDeployment",
     "secret": "111111",
-    "fullPath": "/Users/rayliu/Documents/GitHub/BubbleHRCandidateService",
+    "fullPath": "/Users/rayliu/Documents/githubWebhookAutoDeployment",
     "restartService": false,
     "pm2ProcessID": "0"
   }],

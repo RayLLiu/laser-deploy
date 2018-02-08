@@ -3,7 +3,7 @@
   "adminPassword": "",
   "adminEnabled": true,
   "repos": [{
-    "full_name": "",
+    "fullName": "",
     "secret": "",
     "fullPath": "",
     "restartService": false,

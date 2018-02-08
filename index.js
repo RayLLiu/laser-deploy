@@ -31,6 +31,7 @@ app.post('/' + deployAPIendpoint, function (req, res) {
       } else {
         // execute git pull
         utilService.updateRepo(repo)
+        res.send(200)
       }
     }
   }
