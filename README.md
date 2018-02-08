@@ -61,7 +61,12 @@ If you run more services on the same service, just add more config objects to `c
 
 ## Tests
 
+Install mocha
+
 `yarn add mocha global`
+
+Run the unit tests
+
 `mocha`
 
 ## Contributors
