@@ -18,19 +18,21 @@ And my repo url is `https://github.com/RayLLiu/githubWebhookAutoDeployment`,
  After that, create a secret string (keep it private)
  If your service is running on pm2, you will also need to add pm2 process id.
 
- 4. After that, change the `config.template.js` to `config.js`
+ 4. After that, change the `config.template.json` to `config.json`
  Your `config.js` should be simillar to this:
- `module.exports.serverConfig = {
-   PORT: 1234,
-   repos: [{
-     fullName: 'yourgGithubID/reponame',
-     secret: 'yourSecret',
-     fullPath: '/path/path',
-     restartService: true,
-     pm2ProcessID: '0'
-   }],
-   deployAPIendpoint: 'deploy'
- }`
+ `{
+  "PORT": 8888,
+  "adminPassword": "",
+  "adminEnabled": true,
+  "repos": [{
+    "full_name": "",
+    "secret": "",
+    "fullPath": "",
+    "restartService": false,
+    "pm2ProcessID": ""
+  }],
+  "deployAPIendpoint": "deploy"
+}`
 5. If you just want to update the repo on the server, leave the restartService to `false` and no need to add a `pm2ProcessID`.
 
 After configuration, run `node index.js` to fire-up the web service.
@@ -57,6 +59,10 @@ Now you can push something to master and the server should be updated immediatel
 
 If you run more services on the same service, just add more config objects to `config.js` and repeat the steps above.
 
+## Tests
+
+`yarn add mocha global`
+`mocha`
 
 ## Contributors
 
