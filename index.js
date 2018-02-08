@@ -19,7 +19,7 @@ app.post('/' + deployAPIendpoint, function (req, res) {
     res.status(500).send('Non master change, ignore')
   } else {
     // find secret
-    var repo = _.find(serverConfig.repos, { fullName: req.body.repository.fullName })
+    var repo = _.find(serverConfig.repos, { fullName: req.body.repository.full_name })
     if (!repo) {
       console.log('Repo not registered')
       res.status(500).send('Repo not registered')
