@@ -14,7 +14,7 @@ class Util {
     }
   }
 
-  restartPM2processfunction (id) {
+  restartPM2process (id) {
     exec('pm2 restart ' + id, this.puts)
   }
 
