@@ -14,6 +14,7 @@ class Util {
     }
   }
 
+  // TODO: instead of static bash script, run bash files here.
   restartPM2process (id) {
     exec('pm2 restart ' + id, this.puts)
   }
