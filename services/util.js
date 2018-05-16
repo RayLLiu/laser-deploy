@@ -8,13 +8,14 @@ class Util {
     console.log(stdout)
   }
   updateRepo (repo) {
-    exec('cd ' + repo.fullPath + ' && git pull && yarn install && cd', this.puts)
+    var bash = 'cd ' + repo.fullPath + ' && git pull && yarn install'
     if (repo.restartService) {
-      setTimeout(function () { this.restartPM2process(repo.pm2ProcessID) }, 5000)
+      bash = bash + ' && pm2 restart' + repo.pm2ProcessID
+      exec(bash)
     }
   }
 
-  // TODO: instead of static bash script, run bash files here. 
+  // TODO: instead of static bash script, run bash files here.
   restartPM2process (id) {
     exec('pm2 restart ' + id, this.puts)
   }
