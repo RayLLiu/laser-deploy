@@ -13,7 +13,6 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 app.post('/' + deployAPIendpoint, function (req, res) {
-  console.log(req.body)
   if (req.body.ref !== 'refs/heads/master') {
     console.log('Non master change, ignore')
     res.status(500).send('Non master change, ignore')
