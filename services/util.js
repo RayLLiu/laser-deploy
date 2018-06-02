@@ -10,7 +10,9 @@ class Util {
   updateRepo (repo) {
     var bash = 'cd ' + repo.fullPath + ' && git pull && yarn install'
     if (repo.restartService) {
-      bash = bash + ' && pm2 restart' + repo.pm2ProcessID
+      bash = bash + ' && pm2 restart ' + repo.pm2ProcessID
+      exec(bash)
+    } else {
       exec(bash)
     }
   }
